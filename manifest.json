@@ -1,0 +1,22 @@
+{
+    "name": "RubTools",
+    "description": "Extensão com utilidades para funcionários da Rubcube.",
+    "version": "1.0",
+    "manifest_version": 3,
+    "permissions": [
+      "contextMenus","scripting", "activeTab"
+    ],
+    "action": {
+      "default_popup": "popup.html",
+      "default_icon": "rub.png"
+    },
+    "icons": {
+      "16": "rub.png",
+      "32": "rub.png",
+      "48": "rub.png",
+      "128": "rub.png"
+    },
+    "background": {
+      "service_worker": "scripts/background.js"
+    }
+  }

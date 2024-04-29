@@ -1,0 +1,1 @@
+alert("Esse comando não funciona nessa página!");
