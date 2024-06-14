@@ -5,6 +5,12 @@ chrome.runtime.onInstalled.addListener(function() {
       title: "Copiar Transcript de Reunião",
       contexts: ["all"]
     });
+    chrome.contextMenus.create({
+        id: "inspect_clipboard",
+        title: "Inspect Clipboard",
+        contexts: ["all"]
+
+    })
   });
   
 // Add a listener for context menu item clicks
@@ -13,16 +19,23 @@ chrome.contextMenus.onClicked.addListener(function(info, tab) {
         if(tab.url.match("https://tldv.io/app/meetings/*")){
             chrome.scripting.executeScript({
                 target: { tabId: tab.id },
-                files: ["scripts/getVoiceLog.js"]
+                files: ["scripts/features/voice-log/getVoiceLog.js"]
             });
             return;
         }
         else {
             chrome.scripting.executeScript({
                 target: { tabId: tab.id },
-                files: ["scripts/errorWrongPage.js"]
+                files: ["scripts/features/voice-log/errors/errorWrongPage.js"]
             });
             return;
         }
+    }
+    if(info.menuItemId === "inspect_clipboard") {
+        chrome.scripting.executeScript({
+            target: {tabId: tab.id},
+            files: ["scripts/features/dev-inspect-clipboard/inspect-clipboard.js"]
+        });
+        return
     }
 });
